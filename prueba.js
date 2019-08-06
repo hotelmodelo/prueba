@@ -1,13 +1,18 @@
-'use strict'
+'use strict';
 
-const http = require('http');
+const express = require('express');
+const app = express();
 
-const server = http.createServer(function (req, res){
-    res.writeHead(200, {'content-type': 'text/plain'});
-    res.end('Hola mundo');
+app.get('/', (req, res) => {
+  res.status(200).send('Hello, world!');
 });
 
-console.log("Hola mundo");
+if (module === require.main) {
 
-server.listen(8080);
+   const server = app.listen(process.env.PORT || 8080, () => {
+    const port = server.address().port;
+    console.log(`App listening on port ${port}`);
+  });
+}
 
+module.exports = app;
